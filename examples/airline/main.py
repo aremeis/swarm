@@ -1,3 +1,4 @@
+import asyncio
 from configs.agents import *
 from swarm.repl import run_demo_loop
 
@@ -15,5 +16,7 @@ context_variables = {
     "flight_context": """The customer has an upcoming flight from LGA (Laguardia) in NYC to LAX in Los Angeles.
 The flight # is 1919. The flight departure date is 3pm ET, 5/21/2024.""",
 }
+
 if __name__ == "__main__":
+    # run_demo_loop is already handling the async/sync conversion internally
     run_demo_loop(triage_agent, context_variables=context_variables, debug=True)

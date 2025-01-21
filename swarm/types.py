@@ -3,12 +3,12 @@ from openai.types.chat.chat_completion_message_tool_call import (
     ChatCompletionMessageToolCall,
     Function,
 )
-from typing import List, Callable, Union, Optional
+from typing import List, Callable, Union, Optional, Coroutine, Any
 
 # Third-party imports
 from pydantic import BaseModel
 
-AgentFunction = Callable[[], Union[str, "Agent", dict]]
+AgentFunction = Callable[..., Union[str, "Agent", dict, Coroutine[Any, Any, Union[str, "Agent", dict]]]]
 
 
 class Agent(BaseModel):

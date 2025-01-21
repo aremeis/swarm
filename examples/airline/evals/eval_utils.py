@@ -5,7 +5,7 @@ import uuid
 from swarm import Swarm
 
 
-def run_function_evals(agent, test_cases, n=1, eval_path=None):
+async def run_function_evals(agent, test_cases, n=1, eval_path=None):
     correct_function = 0
     results = []
     eval_id = str(uuid.uuid4())
@@ -24,7 +24,7 @@ def run_function_evals(agent, test_cases, n=1, eval_path=None):
         print(f"\033[94mConversation: \033[0m{test_case['conversation']}\n")
         for i in range(n):
             print(f"\033[90mIteration: {i + 1}/{n}\033[0m")
-            response = client.run(
+            response = await client.run(
                 agent=agent, messages=test_case["conversation"], max_turns=1
             )
             output = extract_response_info(response)
@@ -89,8 +89,6 @@ def run_function_evals(agent, test_cases, n=1, eval_path=None):
 
         with open(eval_path, "w") as file:
             json.dump(existing_data, file, indent=4)
-
-    return overall_accuracy
 
     return overall_accuracy
 
